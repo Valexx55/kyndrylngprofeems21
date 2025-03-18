@@ -1,0 +1,31 @@
+<p>BÚSQUEDA DE ALUMNO POR ID</p>
+
+
+
+
+<div class="form-group">
+    <label for="nombre">Id buscado</label>
+    <input type="number" name="idalumno" [(ngModel)]="idbusqueda" class="form-control" placeholder="Intro el id del alumno a buscar">
+</div>
+<br>
+<button class="btn btn-primary" (click)="buscarAlumnoPorId()">BUSCAR</button>
+
+<div class="container" *ngIf="alumno.id!=0">
+    ALUMNO ngIf  <br>
+    ID {{alumno.id}} <br>
+    Nombre {{alumno.nombre}} <br>
+    Apellido {{alumno.apellido}} <br>
+    Edad {{alumno.edad}} <br>
+</div>
+<!-- 
+@if (alumno.id!=0){
+    <div class="container">
+        ALUMNO if nuevo <br>
+        ID {{alumno.id}} <br>
+        Nombre {{alumno.nombre}} <br>
+        Apellido {{alumno.apellido}} <br>
+        Edad {{alumno.edad}} <br>
+    </div>
+}
+-->
+

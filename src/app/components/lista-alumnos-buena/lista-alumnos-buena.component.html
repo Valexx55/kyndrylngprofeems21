@@ -1,0 +1,40 @@
+<p>LISTADO DE ALUMNOS </p>
+
+<div class="listaAlumnos">
+
+    <!--<fa-icon [icon]="iconoCafe"></fa-icon>-->
+
+    <!-- for para pintar la lista de alumnos recibida-->
+@for (alumno of listaAlumnos; track alumno.id)
+{
+
+    <div class="card">
+
+        @if (alumno.id%2==0)
+        {
+            <img class="card-img-top" alt="Logo persona" src="https://randomuser.me/api/portraits/men/{{alumno.id}}.jpg" >
+        } @else {
+            <img class="card-img-top" alt="Logo persona" src="https://randomuser.me/api/portraits/women/{{alumno.id}}.jpg" >
+        }
+        
+
+        <div class="card-body">
+            <h5 class="card-title"> {{alumno.id}}  {{alumno.nombre | uppercase}} {{alumno.apellido}} </h5>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Email {{alumno.email}}</li>
+                <li class="list-group-item">Edad {{alumno.edad}}</li>
+            </ul>
+        </div>
+        <div class="card-footer text-muted">
+            <p>{{alumno.creadoEn | date: 'medium'}} </p>
+        </div>
+        <button title="b1" class="btn btn-success" >EDITAR</button>
+        <button title="b2" class="btn btn-danger" >BORRAR</button>
+    </div>
+
+}
+
+</div>
+
+
+

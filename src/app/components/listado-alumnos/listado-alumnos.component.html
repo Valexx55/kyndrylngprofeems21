@@ -1,0 +1,15 @@
+<p>listado-alumnos works!</p>
+ALUMNO <br>
+ID {{alumno.id}} <br>
+Nombre {{alumno.nombre}} <br>
+Apellido {{alumno.apellido}} <br>
+Edad {{alumno.edad}} <br>
+
+
+<button [class]="estiloBoton()" (click)="tocarCambio()">CAMBIO</button>
+
+
+<div class="form-group">
+    <label for="nombre">Nuevo Nombre</label>
+    <input type="text" name="nombre" [(ngModel)]="alumno.nombre" class="form-control" id="nombre">
+</div>
