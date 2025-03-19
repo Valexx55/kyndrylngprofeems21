@@ -14,16 +14,18 @@ import {MatPaginatorModule, PageEvent} from '@angular/material/paginator';
 })
 export class ListaAlumnosBuenaComponent implements OnInit, OnDestroy {
 
+//TODO: trabajar con imágenes por defecto
+
   observerListaAlumnos: Observer<Array<Alumno>>
 
   listaAlumnos!: Array<Alumno>
 
   alumnoService: AlumnoService = inject(AlumnoService)
 
-  totalRegistros:number=10
-  totalPorPagina:number=5
+  totalRegistros:number=0
+  totalPorPagina:number=4
   paginaActual:number=0
-  pageSizeOptions:number[]=[5, 10, 15, 20]
+  pageSizeOptions:number[]=[4, 8, 12, 24]
 
 
   constructor ()
@@ -48,12 +50,35 @@ export class ListaAlumnosBuenaComponent implements OnInit, OnDestroy {
   }
   ngOnInit(): void {
     //aquí llamamos al servicio
-    this.alumnoService.listadoAlumnos().subscribe(this.observerListaAlumnos);
+    //this.alumnoService.listadoAlumnos().subscribe(this.observerListaAlumnos);
+    this.obtenerPagina()
   }
 
   paginar (evento:PageEvent)
   {
     console.log("PAGINAR");
+
+    this.paginaActual = evento.pageIndex;
+    this.totalPorPagina = evento.pageSize;
+
+    this.obtenerPagina();
+  }
+
+  obtenerPagina ()
+  {
+    this.alumnoService.listadoAlumnosPorPaginas(this.paginaActual, this.totalPorPagina).subscribe(
+      {
+       next: respuesta => {
+         console.log('Observer got a next value: ' + respuesta)
+         this.listaAlumnos = respuesta.content as Alumno[];
+         this.totalRegistros = respuesta.totalElements;
+         //this.listaAlumnos = <Alumno[]> respuesta.content;//casting
+       },
+       error: err => console.error('Observer got an error: ' + err),
+       complete: () => console.log('Observer got a complete notification'),
+     }
+   )
+
   }
 
 }

@@ -6,6 +6,7 @@ export class Alumno {
     email:string;
     creadoEn:string; //creadoEn!:string;//!non null operator
     edad:number;
+    fotoHashCode!:number;
 
     constructor()
    {

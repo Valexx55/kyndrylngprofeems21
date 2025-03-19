@@ -12,9 +12,10 @@
 
     <div class="card">
 
-        @if (alumno.id%2==0)
+        
+        @if (alumno.fotoHashCode)
         {
-            <img class="card-img-top" alt="Logo persona" src="https://randomuser.me/api/portraits/men/{{alumno.id}}.jpg" >
+            <img class="card-img-top" alt="Logo persona" src="http://localhost:9090/api/alumnos/obtenerFoto/{{alumno.id}}" >
         } @else {
             <img class="card-img-top" alt="Logo persona" src="https://randomuser.me/api/portraits/women/{{alumno.id}}.jpg" >
         }

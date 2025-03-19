@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Alumno } from '../model/alumno';
 import { Observable } from 'rxjs';
@@ -26,4 +26,14 @@ export class AlumnoService {
     return this.httpClient.get<Array<Alumno>>("http://localhost:9090/api/alumnos");
     //return this.httpClient.get<Array<Alumno>>("http://localhost:33333/alumno");
  } 
+
+
+listadoAlumnosPorPaginas (page:number, size:number): Observable<any>
+{
+  let parametros = new HttpParams().set('page', page).set('size', size);
+  return this.httpClient.get<any>("http://localhost:9090/api/alumnos/pagina", {params: parametros} );
+}
+
+
+
 }
