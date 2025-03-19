@@ -4,6 +4,16 @@
 
 <div class="listaAlumnos">
 
+    @if (listaActualizada)
+    {
+        <!--<mat-progress-bar mode="indeterminate"></mat-progress-bar>-->
+        
+    } @else  {
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    }
+    
+
+
     <!--<fa-icon [icon]="iconoCafe"></fa-icon>-->
 
     <!-- for para pintar la lista de alumnos recibida-->

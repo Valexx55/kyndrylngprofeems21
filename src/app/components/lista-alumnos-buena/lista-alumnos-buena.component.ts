@@ -5,10 +5,11 @@ import { AlumnoService } from '../../services/alumno.service';
 import { DatePipe, NgFor, NgIf, UpperCasePipe } from '@angular/common';
 //import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import {MatPaginatorModule, PageEvent} from '@angular/material/paginator';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 @Component({
   selector: 'app-lista-alumnos-buena',
-  imports: [NgFor, NgIf, UpperCasePipe, DatePipe, MatPaginatorModule],
+  imports: [NgFor, NgIf, UpperCasePipe, DatePipe, MatPaginatorModule,MatProgressBarModule ],
   templateUrl: './lista-alumnos-buena.component.html',
   styleUrl: './lista-alumnos-buena.component.css'
 })
@@ -27,11 +28,14 @@ export class ListaAlumnosBuenaComponent implements OnInit, OnDestroy {
   paginaActual:number=0
   pageSizeOptions:number[]=[4, 8, 12, 24]
 
+  listaActualizada:boolean;
+
 
   constructor ()
  {
 
   //this.totalRegistros
+  this.listaActualizada = false;
 
   this.observerListaAlumnos = {
     complete: () => { console.log("Comunicación completada"); },
@@ -60,7 +64,7 @@ export class ListaAlumnosBuenaComponent implements OnInit, OnDestroy {
 
     this.paginaActual = evento.pageIndex;
     this.totalPorPagina = evento.pageSize;
-
+    this.listaActualizada = false;
     this.obtenerPagina();
   }
 
@@ -69,9 +73,10 @@ export class ListaAlumnosBuenaComponent implements OnInit, OnDestroy {
     this.alumnoService.listadoAlumnosPorPaginas(this.paginaActual, this.totalPorPagina).subscribe(
       {
        next: respuesta => {
-         console.log('Observer got a next value: ' + respuesta)
+         //console.log('Observer got a next value: ' + respuesta)
          this.listaAlumnos = respuesta.content as Alumno[];
          this.totalRegistros = respuesta.totalElements;
+         this.listaActualizada = true;
          //this.listaAlumnos = <Alumno[]> respuesta.content;//casting
        },
        error: err => console.error('Observer got an error: ' + err),
