@@ -1,5 +1,7 @@
 <p>LISTADO DE ALUMNOS </p>
 
+<!--<mat-slide-toggle>Toggle me!</mat-slide-toggle>-->
+
 <div class="listaAlumnos">
 
     <!--<fa-icon [icon]="iconoCafe"></fa-icon>-->
@@ -33,6 +35,15 @@
     </div>
 
 }
+
+<mat-paginator
+    [length]="totalRegistros"
+    [pageSize]="totalPorPagina"
+    [pageSizeOptions]="pageSizeOptions"
+    [pageIndex]="paginaActual"
+    showFirstLastButtons
+    (page)="paginar($event)"
+></mat-paginator>
 
 </div>
 
