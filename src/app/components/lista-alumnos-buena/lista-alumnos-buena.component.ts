@@ -8,16 +8,29 @@ import {MatPaginatorModule, PageEvent} from '@angular/material/paginator';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { RUTA_API_GATEWAY } from '../../config/app';
 import { RouterLink } from '@angular/router';
+import { FontAwesomeModule, FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { faCoffee, faPenFancy, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-lista-alumnos-buena',
-  imports: [NgFor, NgIf, UpperCasePipe, DatePipe, MatPaginatorModule,MatProgressBarModule, RouterLink ],
+  imports: [NgFor, NgIf, UpperCasePipe, DatePipe, MatPaginatorModule,MatProgressBarModule, RouterLink, FontAwesomeModule, FaIconComponent],
   templateUrl: './lista-alumnos-buena.component.html',
   styleUrl: './lista-alumnos-buena.component.css'
 })
 export class ListaAlumnosBuenaComponent implements OnInit, OnDestroy {
 
-//TODO: trabajar con imágenes por defecto
+  //iconos de las opciiones de borrar y modificar
+  faPenFancy = faPenFancy //editar
+  faTrash = faTrash //editar
+
+
+
+//TODO: IMPLENTAR LA FUNCIONALIDAD DEL BORRADO
+/**
+ * 1) DETECTAR EL EVENTO EN LA PLANTILLA AL COMPONENTE
+ * 2) LLAMAR AL SERVICIO (DELETE)
+ * 3) GESTIONAR LA RESPUESTA Y LA LISTA ACTUALIZADA
+ */
 
   ruta_servidor:string = RUTA_API_GATEWAY
 
@@ -88,6 +101,18 @@ export class ListaAlumnosBuenaComponent implements OnInit, OnDestroy {
        complete: () => console.log('Observer got a complete notification'),
      }
    )
+
+  }
+
+  borrarAlumno (id:number)
+  {
+    console.log("El usuario quiere borrar el alumno " + id);
+//TODO: IMPLENTAR LA FUNCIONALIDAD DEL BORRADO
+/**
+ * 1) DETECTAR EL EVENTO EN LA PLANTILLA AL COMPONENTE x
+ * 2) LLAMAR AL SERVICIO (DELETE)
+ * 3) GESTIONAR LA RESPUESTA Y LA LISTA ACTUALIZADA
+ */
 
   }
 
