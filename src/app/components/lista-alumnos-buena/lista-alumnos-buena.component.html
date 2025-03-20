@@ -11,12 +11,7 @@
     } 
     
 
-
-    <!--<fa-icon [icon]="iconoCafe"></fa-icon>-->
-
-    <!-- for para pintar la lista de alumnos recibida-->
-    <!-- <img src="assets/desconocido.png"> -->
-@for (alumno of listaAlumnos; track alumno.id)
+    @for (alumno of listaAlumnos; track alumno.id)
 {
 
 
@@ -27,25 +22,31 @@
             <!--<img class="card-img-top img-fluid" alt="Logo persona" src="http://localhost:9090/api/alumnos/obtenerFoto/{{alumno.id}}" >-->
             <div style="
             height: 280px !important;
-            background-image: url(http://localhost:9090/api/alumnos/obtenerFoto/{{alumno.id}});
+            background-image: url({{ruta_servidor}}/api/alumnos/obtenerFoto/{{alumno.id}});
             background-repeat: no-repeat;
             background-size: cover;
             background-position: center;
           "></div>
-        } @else {
+        } @else if (alumno.id%2==0){
             <div style="
             height: 280px !important;
             background-image: url(https://randomuser.me/api/portraits/women/{{alumno.id}}.jpg);
             background-repeat: no-repeat;
             background-size: cover;
             background-position: center;
-          ">
-            <!--<img class="card-img-top img-fluid" alt="Logo persona" src="https://randomuser.me/api/portraits/women/{{alumno.id}}.jpg" >-->
-        </div>
+          "></div>
+            
+        
+        } @else {
+             <div style="
+            height: 280px !important;
+            background-image: url(assets/sinfoto.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+          "></div>
         }
-        
-        
-
+    
         <div class="card-body">
             <h5 class="card-title"> {{alumno.id}}  {{alumno.nombre | uppercase}} {{alumno.apellido}} </h5>
             <ul class="list-group list-group-flush">

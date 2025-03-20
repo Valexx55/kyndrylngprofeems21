@@ -6,6 +6,7 @@ import { DatePipe, NgFor, NgIf, UpperCasePipe } from '@angular/common';
 //import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import {MatPaginatorModule, PageEvent} from '@angular/material/paginator';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { RUTA_API_GATEWAY } from '../../config/app';
 
 @Component({
   selector: 'app-lista-alumnos-buena',
@@ -16,6 +17,8 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 export class ListaAlumnosBuenaComponent implements OnInit, OnDestroy {
 
 //TODO: trabajar con imágenes por defecto
+
+  ruta_servidor:string = RUTA_API_GATEWAY
 
   observerListaAlumnos: Observer<Array<Alumno>>
 

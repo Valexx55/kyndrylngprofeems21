@@ -1,0 +1,2 @@
+//ARCHIVO DE PROPIEDADES /CONSTANTES
+export const RUTA_API_GATEWAY = "http://localhost:9090";
