@@ -4,31 +4,46 @@
 
 <div class="listaAlumnos">
 
-    @if (listaActualizada)
+    @if (listaPendiente)
     {
-        <!--<mat-progress-bar mode="indeterminate"></mat-progress-bar>-->
-        
-    } @else  {
         <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-    }
+        
+    } 
     
 
 
     <!--<fa-icon [icon]="iconoCafe"></fa-icon>-->
 
     <!-- for para pintar la lista de alumnos recibida-->
+    <!-- <img src="assets/desconocido.png"> -->
 @for (alumno of listaAlumnos; track alumno.id)
 {
 
-    <div class="card">
 
-        
+    <div class="card">
+    
         @if (alumno.fotoHashCode)
         {
-            <img class="card-img-top" alt="Logo persona" src="http://localhost:9090/api/alumnos/obtenerFoto/{{alumno.id}}" >
+            <!--<img class="card-img-top img-fluid" alt="Logo persona" src="http://localhost:9090/api/alumnos/obtenerFoto/{{alumno.id}}" >-->
+            <div style="
+            height: 280px !important;
+            background-image: url(http://localhost:9090/api/alumnos/obtenerFoto/{{alumno.id}});
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+          "></div>
         } @else {
-            <img class="card-img-top" alt="Logo persona" src="https://randomuser.me/api/portraits/women/{{alumno.id}}.jpg" >
+            <div style="
+            height: 280px !important;
+            background-image: url(https://randomuser.me/api/portraits/women/{{alumno.id}}.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+          ">
+            <!--<img class="card-img-top img-fluid" alt="Logo persona" src="https://randomuser.me/api/portraits/women/{{alumno.id}}.jpg" >-->
+        </div>
         }
+        
         
 
         <div class="card-body">

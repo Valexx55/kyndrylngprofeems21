@@ -28,14 +28,14 @@ export class ListaAlumnosBuenaComponent implements OnInit, OnDestroy {
   paginaActual:number=0
   pageSizeOptions:number[]=[4, 8, 12, 24]
 
-  listaActualizada:boolean;
+  listaPendiente:boolean;
 
 
   constructor ()
  {
 
   //this.totalRegistros
-  this.listaActualizada = false;
+  this.listaPendiente = true;
 
   this.observerListaAlumnos = {
     complete: () => { console.log("Comunicación completada"); },
@@ -55,6 +55,7 @@ export class ListaAlumnosBuenaComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     //aquí llamamos al servicio
     //this.alumnoService.listadoAlumnos().subscribe(this.observerListaAlumnos);
+    this.listaPendiente = true;
     this.obtenerPagina()
   }
 
@@ -64,7 +65,7 @@ export class ListaAlumnosBuenaComponent implements OnInit, OnDestroy {
 
     this.paginaActual = evento.pageIndex;
     this.totalPorPagina = evento.pageSize;
-    this.listaActualizada = false;
+    this.listaPendiente = true;
     this.obtenerPagina();
   }
 
@@ -76,7 +77,7 @@ export class ListaAlumnosBuenaComponent implements OnInit, OnDestroy {
          //console.log('Observer got a next value: ' + respuesta)
          this.listaAlumnos = respuesta.content as Alumno[];
          this.totalRegistros = respuesta.totalElements;
-         this.listaActualizada = true;
+         this.listaPendiente = false;
          //this.listaAlumnos = <Alumno[]> respuesta.content;//casting
        },
        error: err => console.error('Observer got an error: ' + err),
