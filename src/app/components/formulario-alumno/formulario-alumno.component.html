@@ -1,1 +1,41 @@
-<p>formulario-alumno works!</p>
+<form #formularioAlumno="ngForm" (ngSubmit)="crearAlumno()">
+    <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input #nombre="ngModel" name="nombre" [(ngModel)]="alumno.nombre" type="text" class="form-control" id="nombre" required
+            pattern=".{3,20}">
+        <!--sección error-->
+        <div class="alert alert-danger" [hidden]="nombre.valid||nombre.pristine">
+            El nombre debe tener entre 3 y 20 caracteres
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="apellido" class="form-label">Apellido</label>
+        <input #apellido="ngModel" name="apellido" [(ngModel)]="alumno.apellido" type="text" class="form-control" id="apellido"
+            required>
+        <div class="alert alert-danger" [hidden]="apellido.valid||apellido.pristine">
+            Apellido obligatorio
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="correo" class="form-label">Email</label>
+        <input #correo="ngModel" name="correo" [(ngModel)]="alumno.email" type="text" class="form-control" id="correo" required email>
+        <div class="alert alert-danger" [hidden]="correo.valid||correo.pristine">
+            Debe introducir un email válido
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="edad" class="form-label">Edad</label>
+        <input #edad="ngModel" name="edad" type="number" [(ngModel)]="alumno.edad" class="form-control" id="edad" min="10" required
+            max="100">
+        <div class="alert alert-danger" [hidden]="edad.valid||edad.pristine">
+           La edad debe estar entre 10 y 100
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="foto" class="form-label">Foto</label>
+        <input type="file" class="form-control" id="foto" (change)="seleccionarFoto($event)">
+    </div>
+
+
+    <button type="submit" [disabled]="!formularioAlumno.valid" class="btn btn-primary">CREAR</button>
+</form>

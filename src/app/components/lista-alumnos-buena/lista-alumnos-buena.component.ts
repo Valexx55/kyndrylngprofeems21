@@ -7,10 +7,11 @@ import { DatePipe, NgFor, NgIf, UpperCasePipe } from '@angular/common';
 import {MatPaginatorModule, PageEvent} from '@angular/material/paginator';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { RUTA_API_GATEWAY } from '../../config/app';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-lista-alumnos-buena',
-  imports: [NgFor, NgIf, UpperCasePipe, DatePipe, MatPaginatorModule,MatProgressBarModule ],
+  imports: [NgFor, NgIf, UpperCasePipe, DatePipe, MatPaginatorModule,MatProgressBarModule, RouterLink ],
   templateUrl: './lista-alumnos-buena.component.html',
   styleUrl: './lista-alumnos-buena.component.css'
 })

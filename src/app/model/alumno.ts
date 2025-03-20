@@ -1,6 +1,6 @@
 export class Alumno {
 
-    id:number;
+    id!:number;
     nombre:string;
     apellido:string;
     email:string;
@@ -10,7 +10,7 @@ export class Alumno {
 
     constructor()
    {
-    this.id = 0;
+    //this.id = 0;
     this.nombre = '';
     this.apellido = '';
     this.email = '';

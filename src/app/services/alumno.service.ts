@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Alumno } from '../model/alumno';
 import { Observable } from 'rxjs';
@@ -8,6 +8,8 @@ import { Observable } from 'rxjs';
 })
 export class AlumnoService {
 
+
+  cabecerasJson: HttpHeaders = new HttpHeaders({'Content-type':'application/json'});
   //aquí hacemos las conexiones por HTTP al servidor
   constructor(private httpClient:HttpClient) { 
     //this.httpClient.
@@ -34,6 +36,26 @@ listadoAlumnosPorPaginas (page:number, size:number): Observable<any>
   return this.httpClient.get<any>("http://localhost:9090/api/alumnos/pagina", {params: parametros} );
 }
 
+
+crearAlumno(alumno:Alumno):Observable<Alumno>
+{
+    return this.httpClient.post<Alumno>("http://localhost:9090/api/alumnos", alumno, {headers:this.cabecerasJson})
+}
+
+
+crearAlumnoConFoto(alumno:Alumno, archivo:File):Observable<Alumno>
+{
+  let formData = new FormData();
+
+    formData.append('nombre', alumno.nombre);
+    formData.append('apellido', alumno.apellido);
+    formData.append('edad', alumno.edad+'');
+    formData.append('email', alumno.email);
+    formData.append('archivo', archivo);
+
+
+  return this.httpClient.post<Alumno>("http://localhost:9090/api/alumnos/insertar-alumno-foto", formData)
+}
 
 
 }
