@@ -104,16 +104,22 @@ export class ListaAlumnosBuenaComponent implements OnInit, OnDestroy {
 
   }
 
-  borrarAlumno (id:number)
+  borrarAlumno (idb:number)
   {
-    console.log("El usuario quiere borrar el alumno " + id);
-//TODO: IMPLENTAR LA FUNCIONALIDAD DEL BORRADO
-/**
- * 1) DETECTAR EL EVENTO EN LA PLANTILLA AL COMPONENTE x
- * 2) LLAMAR AL SERVICIO (DELETE)
- * 3) GESTIONAR LA RESPUESTA Y LA LISTA ACTUALIZADA
- */
+    console.log("El usuario quiere borrar el alumno " + idb);
+    this.alumnoService.borrarAlumnoPorId (idb).subscribe
+    ({
+      next: respuesta => {
+        alert('Alumno borrado')
+        //actualizo la lista, eliminamos de la vista al id borrado
+        this.listaAlumnos =  this.listaAlumnos.filter(a => a.id!= idb )
+        
+      },
+      error: err => console.error('Error al borrar ' + err),
+      complete: () => console.log('Com delete completada'),
+    })
 
-  }
+    }
+  
 
 }

@@ -42,6 +42,11 @@ crearAlumno(alumno:Alumno):Observable<Alumno>
     return this.httpClient.post<Alumno>("http://localhost:9090/api/alumnos", alumno, {headers:this.cabecerasJson})
 }
 
+borrarAlumnoPorId (id:number):Observable<void>
+{
+  return this.httpClient.delete<void>("http://localhost:9090/api/alumnos/"+id);
+}
+
 
 crearAlumnoConFoto(alumno:Alumno, archivo:File):Observable<Alumno>
 {
