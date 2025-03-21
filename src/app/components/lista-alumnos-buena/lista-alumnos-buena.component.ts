@@ -7,7 +7,7 @@ import { DatePipe, NgFor, NgIf, UpperCasePipe } from '@angular/common';
 import {MatPaginatorModule, PageEvent} from '@angular/material/paginator';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { RUTA_API_GATEWAY } from '../../config/app';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FontAwesomeModule, FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faCoffee, faPenFancy, faTrash } from '@fortawesome/free-solid-svg-icons';
 
@@ -39,6 +39,7 @@ export class ListaAlumnosBuenaComponent implements OnInit, OnDestroy {
   listaAlumnos!: Array<Alumno>
 
   alumnoService: AlumnoService = inject(AlumnoService)
+  router:Router = inject(Router)//servicio para navegar por programación
 
   totalRegistros:number=0
   totalPorPagina:number=4
@@ -118,6 +119,16 @@ export class ListaAlumnosBuenaComponent implements OnInit, OnDestroy {
       error: err => console.error('Error al borrar ' + err),
       complete: () => console.log('Com delete completada'),
     })
+
+    }
+
+    editarAlumno(alumno:Alumno)
+    {
+      console.log("a edición alumno " + alumno.id);
+      //transito al compoenente del formulario
+      //guardar el alumno en el servicio
+      this.alumnoService.alumnoEnEdicion = alumno
+      this.router.navigate(["formulario/edit", alumno.id])
 
     }
   

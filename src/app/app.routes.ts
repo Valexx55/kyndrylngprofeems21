@@ -10,6 +10,7 @@ import { ListaAlumnosBuenaComponent } from './components/lista-alumnos-buena/lis
 export const routes: Routes = [
    {path:'alumnos', component: ListadoAlumnosComponent},
   {path:'formulario', component: FormularioAlumnoComponent}, 
+  {path:'formulario/edit/:idAlumno', component: FormularioAlumnoComponent},
   {path:'busqueda', component: BusquedaAlumnoComponent},
   {path:'listadoAlumnos', component: ListaAlumnosBuenaComponent},
 ];

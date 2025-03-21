@@ -9,6 +9,8 @@ import { Observable } from 'rxjs';
 export class AlumnoService {
 
 
+  alumnoEnEdicion!:Alumno
+
   cabecerasJson: HttpHeaders = new HttpHeaders({'Content-type':'application/json'});
   //aquí hacemos las conexiones por HTTP al servidor
   constructor(private httpClient:HttpClient) { 
@@ -37,14 +39,22 @@ listadoAlumnosPorPaginas (page:number, size:number): Observable<any>
 }
 
 
+
+
+borrarAlumnoPorId (id:number):Observable<void>
+{
+  return this.httpClient.delete<void>("http://localhost:9090/api/alumnos/"+id);
+}
+
+
 crearAlumno(alumno:Alumno):Observable<Alumno>
 {
     return this.httpClient.post<Alumno>("http://localhost:9090/api/alumnos", alumno, {headers:this.cabecerasJson})
 }
 
-borrarAlumnoPorId (id:number):Observable<void>
+editarAlumno(alumno:Alumno, id:number):Observable<Alumno>
 {
-  return this.httpClient.delete<void>("http://localhost:9090/api/alumnos/"+id);
+    return this.httpClient.put<Alumno>("http://localhost:9090/api/alumnos/"+id, alumno, {headers:this.cabecerasJson})
 }
 
 
@@ -61,6 +71,22 @@ crearAlumnoConFoto(alumno:Alumno, archivo:File):Observable<Alumno>
 
   return this.httpClient.post<Alumno>("http://localhost:9090/api/alumnos/insertar-alumno-foto", formData)
 }
+
+
+editarAlumnoConFoto(alumno:Alumno, archivo:File, id:number):Observable<Alumno>
+{
+  let formData = new FormData();
+
+    formData.append('nombre', alumno.nombre);
+    formData.append('apellido', alumno.apellido);
+    formData.append('edad', alumno.edad+'');
+    formData.append('email', alumno.email);
+    formData.append('archivo', archivo);
+
+
+  return this.httpClient.put<Alumno>("http://localhost:9090/api/alumnos/editar-con-foto/"+id, formData)
+}
+
 
 
 }

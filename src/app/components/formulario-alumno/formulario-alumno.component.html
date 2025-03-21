@@ -1,4 +1,4 @@
-<form #formularioAlumno="ngForm" (ngSubmit)="crearAlumno()">
+<form #formularioAlumno="ngForm" (ngSubmit)="enEdicion ? editarAlumno() : crearAlumno()">
     <div class="mb-3">
         <label for="nombre" class="form-label">Nombre</label>
         <input #nombre="ngModel" name="nombre" [(ngModel)]="alumno.nombre" type="text" class="form-control" id="nombre" required
@@ -37,5 +37,5 @@
     </div>
 
 
-    <button type="submit" [disabled]="!formularioAlumno.valid" class="btn btn-primary">CREAR</button>
+    <button type="submit" [disabled]="!formularioAlumno.valid" [class]="estiloBoton()">{{(enEdicion) ? 'ACTUALIZAR' : 'CREAR'}}</button>
 </form>

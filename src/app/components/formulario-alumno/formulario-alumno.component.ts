@@ -1,10 +1,11 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Alumno } from '../../model/alumno';
 import { AlumnoService } from '../../services/alumno.service';
 import { NgIf } from '@angular/common';
 import { Observer } from 'rxjs';
 import { error } from 'console';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-formulario-alumno',
@@ -12,12 +13,17 @@ import { error } from 'console';
   templateUrl: './formulario-alumno.component.html',
   styleUrl: './formulario-alumno.component.css'
 })
-export class FormularioAlumnoComponent {
+export class FormularioAlumnoComponent implements OnInit {
 
 alumno:Alumno;
 alumnoService:AlumnoService=inject(AlumnoService)
 foto_seleccionada: File|null //Union Type 
 observador:Observer<Alumno>
+@Input() idAlumno!:string //copia el valor de la url a este atributo de la clase //debemos configuar en app config withComponentInputBinding()
+ruta:ActivatedRoute = inject(ActivatedRoute)//para acceder al valor de la url 
+enEdicion!:boolean
+router:Router = inject(Router)
+
 
 constructor()
 {
@@ -28,6 +34,7 @@ constructor()
     complete: () => console.log('Com terminada'),
     next: (alumnoNuevo) => {
       alert('Actualizado el registro de alumnos')
+      this.router.navigateByUrl('/listadoAlumnos')
     } , 
     error: (error:any)=> {
       window.alert('Error al insertar')
@@ -37,6 +44,39 @@ constructor()
 
 
 }
+  ngOnInit(): void {
+    //throw new Error('Method not implemented.');
+    //let url = window.location.href;
+    //console.log(`url ${url} idAlumno ${this.idAlumno} `);
+    if (this.idAlumno)
+    {
+      console.log("estamos en edición");
+      //obtener el alumno del servicio
+      this.alumno = this.alumnoService.alumnoEnEdicion
+      this.enEdicion = true
+    } else {
+      console.log("estamos en creación");
+      this.enEdicion = false
+    }
+  }
+
+  estiloBoton ():string
+  {
+    let estilo:string = ""
+
+      if (this.enEdicion)
+      {
+        estilo = "btn btn-success"
+      } else 
+      {
+        estilo = "btn btn-primary"
+      }
+
+    return estilo
+
+  }
+
+
 
 crearAlumno()
 {
@@ -51,6 +91,19 @@ crearAlumno()
   
 
 }
+
+editarAlumno ()
+{
+  console.log('A editar alumno');
+  if (this.foto_seleccionada!=null)
+    {
+      this.alumnoService.editarAlumnoConFoto(this.alumno, this.foto_seleccionada, this.alumno.id).subscribe(this.observador)
+  
+    } else {
+      this.alumnoService.editarAlumno(this.alumno, this.alumno.id).subscribe(this.observador)
+    }
+}
+
 
 seleccionarFoto (evento:Event)
 {
