@@ -8,4 +8,6 @@ import { Component } from '@angular/core';
 })
 export class RegistroComponent {
 
+  //TODO: FORUMALARIO DE ALTA Y ALTA DE NUEVOS USUARIO EN EL SERVIDOR
+
 }
