@@ -95,12 +95,17 @@ export class ListaAlumnosBuenaComponent implements OnInit, OnDestroy {
          //console.log('Observer got a next value: ' + respuesta)
          this.listaAlumnos = respuesta.content as Alumno[];
          this.totalRegistros = respuesta.totalElements;
-         this.listaPendiente = false;
+         
          //this.listaAlumnos = <Alumno[]> respuesta.content;//casting
        },
-       error: err => console.error('Observer got an error: ' + err),
-       complete: () => console.log('Observer got a complete notification'),
+       error: err => {console.error('Observer got an error: ' + err)
+        alert("Error al obtener el listado")
+       },
+       complete: () => {
+        console.log('Observer got a complete notification');
+        this.listaPendiente = false;
      }
+    }
    )
 
   }
